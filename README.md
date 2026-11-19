@@ -36,7 +36,14 @@ npm run dev
 
 ### Bootstrap a New SaaS (24h Sprint or Standard SDD)
 
+To start a fresh repository on race day without inheriting the boilerplate Git history (FounderRace Art. 7):
+
 ```bash
+npx degit juliennoel22/saas-juliennoel-fr-boilerplate my-saas
+cd my-saas
+git init
+npm install
+npm run doctor
 npm run setup:race -- \
   --name "Product Name" \
   --slug "product-slug" \
@@ -48,6 +55,11 @@ npm run setup:race -- \
   --lang fr \
   --init-specs 24h
 ```
+
+Notes:
+- `--price-cents` updates `plans.starter.priceCents` in `src/config/site.ts`; adjust `plans.pro` directly in `src/config/site.ts` if needed.
+- Ensure `supabase login` is completed (`npm run doctor`) before provisioning cloud migrations.
+- In `.mcp.json`, configure Stripe using a **Restricted API Key (RAK)** or OAuth rather than a full `sk_live_` secret.
 
 ### Operational Scripts
 
