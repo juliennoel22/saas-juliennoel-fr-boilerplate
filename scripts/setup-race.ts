@@ -22,7 +22,29 @@ const cliSchema = z.object({
     .transform((v) => v === "true"),
   lang: z.enum(["fr", "en"]).default("fr"),
   initSpecs: z.enum(["24h", "standard"]).default("24h"),
+  boilerplateSha: z
+    .string()
+    .trim()
+    .regex(/^[a-f0-9]{7,40}$/)
+    .optional(),
 });
+
+const BOILERPLATE_REPO_URL = "https://github.com/juliennoel22/saas-juliennoel-fr-boilerplate.git";
+
+function resolveBoilerplateSha(explicitSha?: string): string {
+  if (explicitSha) return explicitSha;
+  try {
+    const out = execFileSync("git", ["ls-remote", BOILERPLATE_REPO_URL, "HEAD"], {
+      encoding: "utf8",
+      timeout: 5000,
+    });
+    const sha = out.trim().split(/\s+/)[0];
+    if (sha && /^[a-f0-9]{40}$/.test(sha)) return sha;
+  } catch {
+    // Offline fallback
+  }
+  return "<REPLACE_WITH_BOILERPLATE_COMMIT_SHA>";
+}
 
 const ALLOWED_CLIS = ["node", "git", "gh", "supabase", "vercel", "stripe"] as const;
 
@@ -56,6 +78,7 @@ function main(): void {
       mcp: { type: "string" },
       lang: { type: "string" },
       "init-specs": { type: "string" },
+      "boilerplate-sha": { type: "string" },
     },
     strict: false,
   });
@@ -71,6 +94,7 @@ function main(): void {
     mcp: values.mcp,
     lang: values.lang,
     initSpecs: values["init-specs"],
+    boilerplateSha: values["boilerplate-sha"],
   });
 
   if (!parsed.success) {
@@ -142,7 +166,8 @@ function main(): void {
     }
   }
 
-  // 5. Update README.md preserving FounderRace Art. 7 citation
+  // 5. Update README.md preserving FounderRace Art. 7 citation + exact boilerplate SHA
+  const boilerplateSha = resolveBoilerplateSha(cfg.boilerplateSha);
   const readmePath = resolve(rootDir, "README.md");
   const readmeContent = `# ${cfg.name}
 
@@ -152,6 +177,7 @@ ${cfg.tagline}
 
 This project was bootstrapped from the public generic boilerplate:
 - **Repository**: https://github.com/juliennoel22/saas-juliennoel-fr-boilerplate
+- **Commit SHA**: \`${boilerplateSha}\`
 - **Scope**: Generic Next.js 16 + Supabase + Stripe Hosted Checkout + AI SDK infrastructure (zero product-specific business logic prior to launch).
 
 ## Local Development

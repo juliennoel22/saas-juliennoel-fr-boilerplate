@@ -25,7 +25,7 @@
 
 ## 3. Protocole de Vérification, Recette & Gouvernance
 - **Avant toute clôture de ticket** : exécuter `npm run check` (`typecheck` + `lint` + `test` + `build`) -> code de sortie `0`.
-- **Recette Binaire & Tunnel Mobile** : distinguer *(1) vérifié par l'agent* (`npm run check`, webhook sim) et *(2) testé par Julien* (commande/URL 1-clic) ; sur smartphone, toujours `npm run build && npm start` + `cloudflared` (jamais `next dev`).
+- **Recette Binaire, Preview & Tunnel Mobile** : distinguer *(1) vérifié par l'agent* (`npm run check`, webhook sim) et *(2) testé par Julien* (commande/URL 1-clic) ; sur tout ticket UI/paiement/mobile, proposer **Vercel Preview (`vercel` sans `--prod`)** pour Remote Control/iPhone ou `mobile-local-tunnel` (`npm run build && npm start` + `cloudflared`, jamais `next dev`), avec `https://*.vercel.app/**` et `https://*.trycloudflare.com/**` dans Supabase Auth Redirect URLs et Production publique.
 - **Audit obligatoire sur auth/paiement/SQL** : lancer les subagents `red-team-auditor` & `mentor-solo-builder` (zéro secret commité, zéro fuite PII).
 - **Intégrité Copy Diff** : pour toute modification de texte visible client, fournir le diff exact *Avant -> Après* sans fausse promesse.
 - **Zéro action Git/Déploiement autonome** : `git commit`, `git push`, `merge` et `vercel --prod` uniquement sur ordre explicite de Julien.

@@ -13,6 +13,7 @@ Keep and adapt this block in any repository bootstrapped from this template:
 
 This project was bootstrapped from the public generic boilerplate:
 - **Repository**: https://github.com/juliennoel22/saas-juliennoel-fr-boilerplate
+- **Commit SHA**: `<BOILERPLATE_COMMIT_SHA>`
 - **Scope**: Generic Next.js 16 + Supabase + Stripe Hosted Checkout + AI SDK infrastructure (zero product-specific business logic prior to launch).
 ```
 
