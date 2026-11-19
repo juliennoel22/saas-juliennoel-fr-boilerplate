@@ -26,7 +26,8 @@ This project was bootstrapped from the public generic boilerplate:
 ## Architecture Highlights
 
 - **Framework**: Next.js 16 (App Router, Turbopack, `src/proxy.ts`), React 19, TypeScript strict (`0 any`, `noUncheckedIndexedAccess`).
-- **UI**: Tailwind CSS v4 + `@coss` primitives (`@base-ui/react`) in Full White Minimalist (`#FFFFFF` / `#09090B` / `#E4E4E7` / `#10B981`, `Geist` & `Geist Mono`), mobile `100dvh`, `>= 16px` inputs, `>= 44px` touch targets.
+- **UI & Motion**: Tailwind CSS v4 + `@coss` primitives (`@base-ui/react`) in Full White Minimalist (`#FFFFFF` / `#09090B` / `#E4E4E7` / `#10B981`, `Geist` & `Geist Mono`), mobile `100dvh`, `>= 16px` inputs, `>= 44px` touch targets, plus embedded `.agents/skills/apple-design/SKILL.md` and `.agents/skills/design-system-switcher/SKILL.md` (`flat-base`, `apple-design`, `onesale` / `onesale-light`, `custom-hybrid`) with interactive previews in `docs/previews/`.
+- **Modular Onboarding Tunnels**: `4` hard-paywall tunnel variants (`input`, `quiz`, `upload`, `audit`) configurable via `siteConfig.tunnelVariant` or `--tunnel` in `setup:race`.
 - **Database & Auth**: `@supabase/ssr` with hardened SQL (`001_initial_schema.sql`), `(select auth.uid())` RLS, `SECURITY DEFINER SET search_path = ''`, protected profile column guard trigger, atomic `FOR UPDATE` credit RPCs, and Signed Upload URLs (`/api/uploads/sign`).
 - **Billing**: Stripe Hosted Checkout (`payment` & `subscription`, `Math.max(50, priceCents)` floor, `Art. L221-28 13°` waiver), Customer Portal, HMAC-verified idempotent webhooks (`webhook_events`), and `VIP_*` test bypass without live Stripe transactions.
 - **AI Layer**: 100% provider-agnostic via Vercel AI SDK (`openrouter`, `google`, `openai`, `mistral`, `anthropic`) with Zod Structured Outputs, post-inference validation, bounded retries (`<= 2`), automatic fallback provider, and optional Tavily Search client.
@@ -58,6 +59,7 @@ npm run setup:race -- \
   --billing one_shot \
   --price-cents 1900 \
   --auth post_aha \
+  --tunnel input \
   --mcp true \
   --lang fr \
   --init-specs 24h

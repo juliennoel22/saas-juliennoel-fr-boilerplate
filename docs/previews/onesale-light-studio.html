@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OneSale Light — Studio Couleurs & Boutons 3D</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    :root {
+      --os-bg: #ffffff;
+      --os-card: #ffffff;
+      --os-fg: #09090b;
+      --os-muted: #71717a;
+      --os-border: #e4e4e7;
+      --os-btn-top: #7938eb;
+      --os-btn-mid: #5b21b6;
+      --os-btn-edge: #3b0764;
+      --os-accent: #10b981;
+      --os-dot: rgba(9, 9, 11, 0.08);
+    }
+
+    .onesale-light-canvas {
+      background-color: var(--os-bg);
+      color: var(--os-fg);
+      background-image: radial-gradient(var(--os-dot) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+
+    .os-card {
+      background-color: var(--os-card);
+      border-color: var(--os-border);
+      box-shadow: 0 1px 2px rgba(9, 9, 11, 0.04), 0 10px 28px -14px rgba(9, 9, 11, 0.08);
+    }
+
+    .os-btn-3d {
+      background: linear-gradient(180deg, var(--os-btn-top) 0%, var(--os-btn-mid) 100%);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-bottom: 3px solid var(--os-btn-edge);
+      box-shadow: 0 4px 16px color-mix(in srgb, var(--os-btn-mid) 35%, transparent), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      transition: transform 110ms cubic-bezier(0.16, 1, 0.3, 1), filter 120ms ease, box-shadow 120ms ease;
+      cursor: pointer;
+    }
+
+    .os-btn-3d:hover {
+      filter: brightness(1.07);
+      transform: translateY(-1px);
+    }
+
+    .os-btn-3d:active {
+      transform: translateY(2px);
+      border-bottom-width: 1px;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    .os-btn-outline-3d {
+      background: var(--os-card);
+      color: var(--os-fg);
+      border: 1px solid var(--os-border);
+      border-bottom: 3px solid color-mix(in srgb, var(--os-border) 85%, #09090b);
+      transition: transform 110ms cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+    }
+
+    .os-btn-outline-3d:hover {
+      transform: translateY(-1px);
+    }
+
+    .os-btn-outline-3d:active {
+      transform: translateY(2px);
+      border-bottom-width: 1px;
+    }
+  </style>
+</head>
+<body class="bg-[#ffffff] text-[#09090b] antialiased">
+  <!-- Studio Controls -->
+  <div class="sticky top-0 z-50 border-b border-[#e4e4e7] bg-[#f4f4f5]/95 px-4 py-3 backdrop-blur-md">
+    <div class="mx-auto flex max-w-5xl flex-col gap-3">
+      <div class="flex flex-wrap items-center justify-between gap-2">
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-semibold text-[#09090b]">OneSale Light Studio</span>
+          <span class="text-xs text-[#71717a]">Modifie chaque couleur en direct</span>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-1.5">
+          <button data-theme="violet" type="button" class="preset-chip rounded-lg border border-[#e4e4e7] bg-[#ffffff] px-2.5 py-1 text-xs font-medium text-[#09090b]">Violet OneSale</button>
+          <button data-theme="ink" type="button" class="preset-chip rounded-lg border border-[#e4e4e7] bg-[#ffffff] px-2.5 py-1 text-xs font-medium text-[#09090b]">Encre Noire</button>
+          <button data-theme="emerald" type="button" class="preset-chip rounded-lg border border-[#e4e4e7] bg-[#ffffff] px-2.5 py-1 text-xs font-medium text-[#09090b]">Émeraude</button>
+          <button data-theme="blue" type="button" class="preset-chip rounded-lg border border-[#e4e4e7] bg-[#ffffff] px-2.5 py-1 text-xs font-medium text-[#09090b]">Bleu Électrique</button>
+          <button id="copy-css" type="button" class="rounded-lg bg-[#09090b] px-3 py-1 text-xs font-medium text-[#ffffff]">Copier Tokens CSS</button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-2 sm:grid-cols-6">
+        <label class="flex items-center justify-between gap-2 rounded-lg border border-[#e4e4e7] bg-[#ffffff] px-2.5 py-1.5 text-xs">
+          <span>Bouton 3D</span>
+          <input id="pick-btn" type="color" value="#6d28d9" class="h-6 w-8 cursor-pointer rounded border-0 bg-transparent p-0" />
+        </label>
+        <label class="flex items-center justify-between gap-2 rounded-lg border border-[#e4e4e7] bg-[#ffffff] px-2.5 py-1.5 text-xs">
+          <span>Accent</span>
+          <input id="pick-accent" type="color" value="#10b981" class="h-6 w-8 cursor-pointer rounded border-0 bg-transparent p-0" />
+        </label>
+        <label class="flex items-center justify-between gap-2 rounded-lg border border-[#e4e4e7] bg-[#ffffff] px-2.5 py-1.5 text-xs">
+          <span>Fond</span>
+          <input id="pick-bg" type="color" value="#ffffff" class="h-6 w-8 cursor-pointer rounded border-0 bg-transparent p-0" />
+        </label>
+        <label class="flex items-center justify-between gap-2 rounded-lg border border-[#e4e4e7] bg-[#ffffff] px-2.5 py-1.5 text-xs">
+          <span>Cartes</span>
+          <input id="pick-card" type="color" value="#ffffff" class="h-6 w-8 cursor-pointer rounded border-0 bg-transparent p-0" />
+        </label>
+        <label class="flex items-center justify-between gap-2 rounded-lg border border-[#e4e4e7] bg-[#ffffff] px-2.5 py-1.5 text-xs">
+          <span>Bordures</span>
+          <input id="pick-border" type="color" value="#e4e4e7" class="h-6 w-8 cursor-pointer rounded border-0 bg-transparent p-0" />
+        </label>
+        <label class="flex items-center justify-between gap-2 rounded-lg border border-[#e4e4e7] bg-[#ffffff] px-2.5 py-1.5 text-xs">
+          <span>Texte</span>
+          <input id="pick-fg" type="color" value="#09090b" class="h-6 w-8 cursor-pointer rounded border-0 bg-transparent p-0" />
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Live OneSale Light Preview -->
+  <div class="onesale-light-canvas min-h-[100dvh]">
+    <header class="border-b backdrop-blur-md" style="border-color: var(--os-border); background: color-mix(in srgb, var(--os-bg) 82%, transparent);">
+      <div class="mx-auto flex h-16 max-w-5xl items-center justify-between px-4 sm:px-6">
+        <span class="text-base font-semibold tracking-tight">[Nom du SaaS]</span>
+        <div class="flex items-center gap-3">
+          <span class="hidden text-sm sm:inline" style="color: var(--os-muted);">Tarifs</span>
+          <span class="text-sm" style="color: var(--os-muted);">Connexion</span>
+          <button type="button" class="os-btn-3d inline-flex min-h-11 items-center gap-2 rounded-xl px-4 text-sm font-semibold">
+            <span>Essayer</span>
+            <span>→</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="mx-auto max-w-5xl px-4 py-14 sm:px-6 sm:py-20">
+      <div class="mx-auto flex max-w-3xl flex-col items-start gap-6 sm:items-center sm:text-center">
+        <span class="inline-flex items-center gap-2 rounded-full border px-3.5 py-1 text-xs font-medium" style="background: var(--os-card); border-color: var(--os-border); color: var(--os-accent);">
+          ● Structure générique prête à configurer
+        </span>
+
+        <h1 class="text-3xl font-semibold tracking-tight sm:text-5xl">
+          [Accroche principale orientée résultat mesurable]
+        </h1>
+
+        <p class="max-w-2xl text-base leading-relaxed sm:text-lg" style="color: var(--os-muted);">
+          [Description neutre en une phrase expliquant ce que l&apos;utilisateur obtient immédiatement.]
+        </p>
+
+        <div class="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
+          <button type="button" class="os-btn-3d inline-flex min-h-12 items-center justify-center gap-2 rounded-xl px-7 text-base font-semibold">
+            <span>[Action IA principale]</span>
+            <span>→</span>
+          </button>
+          <button type="button" class="os-btn-outline-3d inline-flex min-h-12 items-center justify-center rounded-xl px-7 text-base font-medium">
+            Voir les tarifs
+          </button>
+        </div>
+      </div>
+
+      <!-- 3 Cards -->
+      <div class="mt-12 grid gap-4 sm:grid-cols-3">
+        <div class="os-card rounded-2xl border p-6">
+          <p class="font-mono text-xs font-semibold" style="color: var(--os-accent);">01 / RÉSULTAT</p>
+          <p class="mt-2 text-base font-semibold">Étape 01</p>
+          <p class="mt-1 text-sm" style="color: var(--os-muted);">[Bénéfice vérifiable n°1 — résultat concret]</p>
+        </div>
+        <div class="os-card rounded-2xl border p-6">
+          <p class="font-mono text-xs font-semibold" style="color: var(--os-accent);">02 / VITESSE</p>
+          <p class="mt-2 text-base font-semibold">Étape 02</p>
+          <p class="mt-1 text-sm" style="color: var(--os-muted);">[Bénéfice vérifiable n°2 — gain de temps mesurable]</p>
+        </div>
+        <div class="os-card rounded-2xl border p-6">
+          <p class="font-mono text-xs font-semibold" style="color: var(--os-accent);">03 / ACCÈS</p>
+          <p class="mt-2 text-base font-semibold">Étape 03</p>
+          <p class="mt-1 text-sm" style="color: var(--os-muted);">[Bénéfice vérifiable n°3 — accès immédiat sans friction]</p>
+        </div>
+      </div>
+
+      <!-- Pricing -->
+      <div class="mt-12 grid gap-6 md:grid-cols-2">
+        <div class="os-card flex flex-col justify-between rounded-2xl border p-6">
+          <div>
+            <p class="text-lg font-semibold">Pack Essentiel</p>
+            <p class="mt-1 text-sm" style="color: var(--os-muted);">[Accès immédiat à l&apos;action principale]</p>
+            <p class="mt-5 font-mono text-3xl font-semibold">19 € <span class="font-sans text-sm font-normal" style="color: var(--os-muted);">paiement unique</span></p>
+          </div>
+          <button type="button" class="os-btn-outline-3d mt-6 inline-flex min-h-12 w-full items-center justify-center rounded-xl text-sm font-semibold">
+            Choisir Pack Essentiel →
+          </button>
+        </div>
+
+        <div class="os-card flex flex-col justify-between rounded-2xl border-2 p-6" style="border-color: var(--os-btn-mid);">
+          <div>
+            <div class="flex items-center justify-between">
+              <p class="text-lg font-semibold">Pack Fondateur</p>
+              <span class="rounded-full px-2.5 py-0.5 text-xs font-semibold text-white" style="background: var(--os-accent);">Recommandé</span>
+            </div>
+            <p class="mt-1 text-sm" style="color: var(--os-muted);">[Capacité étendue pour usage intensif]</p>
+            <p class="mt-5 font-mono text-3xl font-semibold">49 € <span class="font-sans text-sm font-normal" style="color: var(--os-muted);">paiement unique</span></p>
+          </div>
+          <button type="button" class="os-btn-3d mt-6 inline-flex min-h-12 w-full items-center justify-center rounded-xl text-sm font-semibold">
+            Choisir Pack Fondateur →
+          </button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const rootStyle = document.documentElement.style;
+    const pickBtn = document.getElementById("pick-btn");
+    const pickAccent = document.getElementById("pick-accent");
+    const pickBg = document.getElementById("pick-bg");
+    const pickCard = document.getElementById("pick-card");
+    const pickBorder = document.getElementById("pick-border");
+    const pickFg = document.getElementById("pick-fg");
+
+    function shiftHex(hex, delta) {
+      const clean = hex.replace("#", "");
+      const num = parseInt(clean, 16);
+      const r = Math.min(255, Math.max(0, (num >> 16) + delta));
+      const g = Math.min(255, Math.max(0, ((num >> 8) & 0xff) + delta));
+      const b = Math.min(255, Math.max(0, (num & 0xff) + delta));
+      return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+    }
+
+    function applyColors() {
+      const btn = pickBtn.value;
+      rootStyle.setProperty("--os-btn-top", shiftHex(btn, 22));
+      rootStyle.setProperty("--os-btn-mid", btn);
+      rootStyle.setProperty("--os-btn-edge", shiftHex(btn, -45));
+      rootStyle.setProperty("--os-accent", pickAccent.value);
+      rootStyle.setProperty("--os-bg", pickBg.value);
+      rootStyle.setProperty("--os-card", pickCard.value);
+      rootStyle.setProperty("--os-border", pickBorder.value);
+      rootStyle.setProperty("--os-fg", pickFg.value);
+    }
+
+    const presets = {
+      violet: { btn: "#6d28d9", accent: "#10b981", bg: "#ffffff", card: "#ffffff", border: "#e4e4e7", fg: "#09090b" },
+      ink: { btn: "#18181b", accent: "#10b981", bg: "#ffffff", card: "#ffffff", border: "#e4e4e7", fg: "#09090b" },
+      emerald: { btn: "#059669", accent: "#09090b", bg: "#ffffff", card: "#ffffff", border: "#e4e4e7", fg: "#09090b" },
+      blue: { btn: "#2563eb", accent: "#10b981", bg: "#ffffff", card: "#ffffff", border: "#e4e4e7", fg: "#09090b" },
+    };
+
+    document.querySelectorAll(".preset-chip").forEach((chip) => {
+      chip.addEventListener("click", () => {
+        const p = presets[chip.dataset.theme];
+        pickBtn.value = p.btn;
+        pickAccent.value = p.accent;
+        pickBg.value = p.bg;
+        pickCard.value = p.card;
+        pickBorder.value = p.border;
+        pickFg.value = p.fg;
+        applyColors();
+      });
+    });
+
+    [pickBtn, pickAccent, pickBg, pickCard, pickBorder, pickFg].forEach((el) => {
+      el.addEventListener("input", applyColors);
+    });
+
+    document.getElementById("copy-css").addEventListener("click", async (e) => {
+      const btn = e.currentTarget;
+      const css = `:root {\n  --background: ${pickBg.value};\n  --card: ${pickCard.value};\n  --foreground: ${pickFg.value};\n  --border: ${pickBorder.value};\n  --primary: ${pickBtn.value};\n  --primary-edge: ${shiftHex(pickBtn.value, -45)};\n  --success: ${pickAccent.value};\n}`;
+      try {
+        await navigator.clipboard.writeText(css);
+        btn.textContent = "Tokens copiés";
+        setTimeout(() => { btn.textContent = "Copier Tokens CSS"; }, 1500);
+      } catch {
+        btn.textContent = "Copie bloquée";
+      }
+    });
+
+    applyColors();
+  </script>
+</body>
+</html>
