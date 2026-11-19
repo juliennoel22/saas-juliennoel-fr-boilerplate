@@ -1,0 +1,29 @@
+{
+  "mcpServers": {
+    "supabase": {
+      "type": "http",
+      "url": "https://mcp.supabase.com/mcp?features=docs,account,database,debugging,development,functions,branching"
+    },
+    "vercel": {
+      "type": "http",
+      "url": "https://mcp.vercel.com"
+    },
+    "stripe": {
+      "command": "npx",
+      "args": ["-y", "@stripe/mcp", "--tools=all"],
+      "env": {
+        "STRIPE_SECRET_KEY": "<STRIPE_RESTRICTED_API_KEY_OR_OAUTH>"
+      }
+    },
+    "posthog": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-remote",
+        "https://mcp.posthog.com/sse",
+        "--header",
+        "Authorization: Bearer <POSTHOG_PERSONAL_API_KEY>"
+      ]
+    }
+  }
+}

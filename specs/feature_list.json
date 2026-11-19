@@ -1,0 +1,54 @@
+{
+  "project": "saas-juliennoel-fr-boilerplate",
+  "version": "1.0.0",
+  "rules": {
+    "maxLinesPerFile": 300,
+    "maxLinesPerUiFile": 150,
+    "zeroExplicitAny": true,
+    "requiredVerificationCommand": "npm run check"
+  },
+  "features": [
+    {
+      "id": "INFRA-01",
+      "category": "foundation",
+      "description": "Next.js 16 + React 19 + Tailwind v4 + Coss UI Full White Minimalist build cleanly",
+      "passes": true
+    },
+    {
+      "id": "INFRA-02",
+      "category": "security",
+      "description": "Hardened Supabase SQL schema with (select auth.uid()) RLS, column guard trigger, atomic credit RPCs, and private storage bucket",
+      "passes": true
+    },
+    {
+      "id": "INFRA-03",
+      "category": "billing",
+      "description": "Stripe Hosted Checkout + Customer Portal + HMAC idempotent webhook + signed VIP test bypass",
+      "passes": true
+    },
+    {
+      "id": "INFRA-04",
+      "category": "ai",
+      "description": "Provider-agnostic Vercel AI SDK structured output layer with Zod parsing, retry, fallback, and Tavily client",
+      "passes": true
+    },
+    {
+      "id": "INFRA-05",
+      "category": "mcp",
+      "description": "Toggleable fail-closed /api/mcp Streamable HTTP JSON-RPC 2.0 endpoint with Zod tool registry",
+      "passes": true
+    },
+    {
+      "id": "INFRA-06",
+      "category": "observability",
+      "description": "PostHog /ingest proxy + SSR zero-flicker bootstrap + test traffic firewall + Resend dev fallback",
+      "passes": true
+    },
+    {
+      "id": "INFRA-07",
+      "category": "sdd",
+      "description": "Complete SDD harness (AGENTS/CLAUDE/GEMINI, memory, 11 templates, CLI scripts, Vitest suite)",
+      "passes": true
+    }
+  ]
+}
