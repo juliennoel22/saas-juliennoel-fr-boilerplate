@@ -23,14 +23,17 @@
 - **UI Full White & Anti-AI Slop** : primitives `@coss` (`npx shadcn@latest add @coss/<name>`), palette `#FFFFFF`/`#09090B`/`#E4E4E7`/`#10B981`, mobile `min-h-[100dvh]`, inputs `>= 16px`, cibles `>= 44px`, `0` emoji, `0` icône `Sparkles`, `0` faux timer/avis.
 - **Tracking & Uploads** : pare-feu PostHog (`src/lib/posthog/firewall.ts`) actif sur trafic dev/test/VIP ; fichiers `> 1 Mo` via Signed Upload URL (`/api/uploads/sign`).
 
-## 3. Protocole de Vérification & Gouvernance
+## 3. Protocole de Vérification, Recette & Gouvernance
 - **Avant toute clôture de ticket** : exécuter `npm run check` (`typecheck` + `lint` + `test` + `build`) -> code de sortie `0`.
-- **Audit obligatoire sur auth/paiement/SQL** : lancer les revues sécurité & modularité (zéro secret commité, zéro fuite PII).
+- **Recette Binaire & Tunnel Mobile** : distinguer *(1) vérifié par l'agent* (`npm run check`, webhook sim) et *(2) testé par Julien* (commande/URL 1-clic) ; sur smartphone, toujours `npm run build && npm start` + `cloudflared` (jamais `next dev`).
+- **Audit obligatoire sur auth/paiement/SQL** : lancer les subagents `red-team-auditor` & `mentor-solo-builder` (zéro secret commité, zéro fuite PII).
 - **Intégrité Copy Diff** : pour toute modification de texte visible client, fournir le diff exact *Avant -> Après* sans fausse promesse.
 - **Zéro action Git/Déploiement autonome** : `git commit`, `git push`, `merge` et `vercel --prod` uniquement sur ordre explicite de Julien.
 
-## 4. Index Rapide
+## 4. Index Rapide & Outillage WSL
 - Configuration produit unique : `src/config/site.ts`
 - Schéma SQL durci : `supabase/migrations/001_initial_schema.sql`
 - Mémoire projet : `.gemini/memory/{MEMORY,adrs,blockers,learnings}.md`
 - Gabarits SDD : `specs/templates/*` et `specs/feature_list.json`
+- Skills & Subagents WSL (`~/.agents/skills/` & `~/.claude/skills/`) : `saas-scoping-architect`, `sdd-ticket-executor`, `robust-engineering-standard`, `premium-craft-auditor`, `mobile-local-tunnel`, `coss`, `Google.securecoder`, `red-team-auditor`, `mentor-solo-builder`.
+- Second Brain (référence lecture seule si besoin) : `/mnt/c/Users/julie/Dropbox/AUTRE/BRAIN_GAME_OS/BRAIN/`

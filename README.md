@@ -16,6 +16,12 @@ This project was bootstrapped from the public generic boilerplate:
 - **Scope**: Generic Next.js 16 + Supabase + Stripe Hosted Checkout + AI SDK infrastructure (zero product-specific business logic prior to launch).
 ```
 
+## Screenshots (Generic Placeholder UI)
+
+| Landing (Desktop `1280x800`) | Tunnel (Mobile `375x812`) | Passwordless Login |
+| :---: | :---: | :---: |
+| ![Landing Desktop](docs/screenshots/landing-desktop.png) | ![Tunnel Mobile](docs/screenshots/tunnel-mobile.png) | ![Login Desktop](docs/screenshots/login-desktop.png) |
+
 ## Architecture Highlights
 
 - **Framework**: Next.js 16 (App Router, Turbopack, `src/proxy.ts`), React 19, TypeScript strict (`0 any`, `noUncheckedIndexedAccess`).
